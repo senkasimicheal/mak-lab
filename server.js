@@ -1,11 +1,11 @@
 var express = require("express");
 var moment = require('moment');
 const cors = require("cors");
-      app = express();
-      Mongoose = require("mongoose");
-      bodyParser = require("body-parser");
-      cookieParser = require("cookie-parser");
-      sessions = require("express-session");
+const app = express();
+const  Mongoose = require("mongoose");
+const  bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const sessions = require("express-session");
 
 //password encryption
 bcrypt = require("bcrypt");
