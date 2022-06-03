@@ -1,0 +1,922 @@
+:root{
+    --gradient:linear-gradient(90deg, #f1c40f, #f39c12);
+}
+
+*{
+    font-family: 'Open Sans', sans-serif;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    border: none; outline: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+*::selection{
+    background: #f39c12;
+    color: #fff;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+html::-webkit-scrollbar{
+    width: 1.5rem;
+}
+
+html::-webkit-scrollbar-track{
+    background: #333;
+}
+
+html::-webkit-scrollbar-thumb{
+    background: linear-gradient(#f1c40f, #f39c12);
+}
+
+section{
+    min-height: 100vh;
+    padding: 1rem 7%;
+    padding-top: 6rem;
+}
+
+.btn{
+    padding: .7rem 3rem;
+    font-size: 2rem;
+    color: #fff;
+    background: var(--gradient);
+    border-radius: 5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+}
+
+header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 1000;
+    padding: 1.5rem 7%;
+    background: var(--gradient);
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+}
+
+header #logo{
+    color: #fff;
+    font-size: 2.5rem;
+}
+
+header .navbar ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+header .navbar ul li{
+    margin: 0 1rem;
+}
+
+header .navbar ul li a{
+    font-size: 2rem;
+    color: #fff;
+}
+
+header .navbar ul li a:hover{
+    color: #444;
+}
+
+/* THE SIGNIN DROPDOWN BUTTON */
+.dd{
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    position: relative;
+}
+
+.dd-content{
+    position: absolute;
+    display: none;
+}
+
+.dd:hover{
+    cursor: pointer;
+    color: rgb(181, 35, 35);
+}
+
+.dd:hover > .dd-content{
+    display: block;
+}
+
+/* THE DROPDOWN SIGNIN CONTENT */
+header #login{
+    font-weight: bold;
+    font-size: large;
+    color: rgb(11, 24, 84);
+    cursor: pointer;
+    display: block;
+    background: slategray;
+}
+
+header #login:hover{
+    color: rgb(154, 115, 24);
+    text-decoration: underline;
+    font-size: large;
+    background: #444;
+}
+
+header #login1{
+    font-weight: bold;
+    font-size: large;
+    color: rgb(11, 24, 84);
+    cursor: pointer;
+    display: block;
+    background:  slategray;
+}
+
+header #login1:hover{
+    color: rgb(154, 115, 24);
+    text-decoration: underline;
+    font-size: large;
+    background: #444;
+}
+
+header #menu{
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+}
+
+/* media queries */
+
+@media (max-width:768px){
+    html{
+        font-size: 55%;
+    }
+
+    header #menu{
+        display: block;
+    }
+
+    header .navbar{
+        position: fixed;
+        top: -120%; left: 0;
+        width: 100%;
+        background: #444;
+    }
+
+    header .navbar ul{
+        flex-flow: column;
+        padding: 2rem 0;
+    }
+
+    header .navbar ul li{
+        margin: 1.5rem 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    header .navbar ul li a{
+        font-size: 2.5rem;
+        display: block;
+    }
+
+    header .navbar ul li a:hover{
+        color: #f39c12;
+    }
+
+    .fa-times{
+        transform: rotate(180deg);
+    }
+
+    header .navbar.nav-toggle{
+        top: 6.4rem;
+    }
+
+    .home h1{
+        font-size: 4rem;
+    }
+
+    .home p{
+        width: auto;
+    }
+
+    .contact .row .image{
+    display: none;
+}
+
+}
+
+section {
+    clear: both;
+}
+
+
+/* STUDENT LOGIN FORM */
+
+.login-form{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: -120%; left: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form.popup{
+    top: 0;
+}
+
+.login-form form{
+    width: 35rem;
+    background: #fff;
+    margin: 0 2rem;
+    padding: 1rem 3rem;
+     border-radius: .5rem;
+    box-shadow: 0 .1rem .3rem #333;
+    position: relative;
+}
+
+.login-form form h3{
+    font-size: 3rem;
+    color: #f39c12;
+    padding: 1rem 0;
+}
+
+.login-form form .box{
+    width: 100%;
+    padding: 1rem 0;
+    margin: 1rem 0;
+    border-bottom: .2rem solid #666;
+    font-size: 1.6rem;
+    color: #333;
+    text-transform: none;
+}
+
+.login-form form .box::placeholder{
+    text-transform: capitalize;
+}
+
+.login-form form .box:focus{
+    border-color: #f39c12;
+}
+
+.login-form form .box:nth-child(3){
+    margin-bottom: 5rem;
+}
+
+.login-form form p{
+    font-size: 1.4rem;
+    color: #666;
+    padding: 1rem 0;
+}
+
+.login-form form p a{
+    color: #f39c12;
+}
+
+.login-form form .btn{
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.login-form form .btn:hover{
+    background: #444;
+}
+
+.login-form form .fa-times{
+    position: absolute;
+    top: 1.5rem; right: 2rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.login-form form .fa-times:hover{
+    color: #444;
+}
+
+
+/* STUDENT SIGNUP FORM */
+
+.signup-form{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: -120%; left: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-form.popup{
+    top: 0;
+}
+
+.signup-form form{
+    width: 35rem;
+    background: #fff;
+    margin: 0 2rem;
+    padding: 1rem 3rem;
+     border-radius: .5rem;
+    box-shadow: 0 .1rem .3rem #333;
+    position: relative;
+}
+
+.signup-form form h3{
+    font-size: 2rem;
+    color: #f39c12;
+    padding: 1rem 0;
+}
+
+.signup-form form .box{
+    width: 100%;
+    padding: 1rem 0;
+    margin: 0px;
+    border-bottom: .2rem solid #666;
+    font-size: 1.6rem;
+    color: #333;
+    text-transform: none;
+}
+
+.signup-form form .box::placeholder{
+    text-transform: capitalize;
+}
+
+.signup-form form .box:focus{
+    border-color: #f39c12;
+}
+
+.signup-form form .box:nth-child(3){
+    margin-bottom: 5rem;
+}
+
+.signup-form form .btn{
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.signup-form form .btn:hover{
+    background: #444;
+}
+
+.signup-form form .fa-times{
+    position: absolute;
+    top: 1.5rem; right: 2rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.signup-form form .fa-times:hover{
+    color: #444;
+}
+
+/* ADMINISTRATOR LOGIN FORM */
+
+.login-form2{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: -120%; left: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form2.popup{
+    top: 0;
+}
+
+.login-form2 form{
+    width: 35rem;
+    background: #fff;
+    margin: 0 2rem;
+    padding: 1rem 3rem;
+     border-radius: .5rem;
+    box-shadow: 0 .1rem .3rem #333;
+    position: relative;
+}
+
+.login-form2 form h3{
+    font-size: 3rem;
+    color: #f39c12;
+    padding: 1rem 0;
+}
+
+.login-form2 form .box{
+    width: 100%;
+    padding: 1rem 0;
+    margin: 1rem 0;
+    border-bottom: .2rem solid #666;
+    font-size: 1.6rem;
+    color: #333;
+    text-transform: none;
+}
+
+.login-form2 form .box::placeholder{
+    text-transform: capitalize;
+}
+
+.login-form2 form .box:focus{
+    border-color: #f39c12;
+}
+
+.login-form2 form .box:nth-child(3){
+    margin-bottom: 5rem;
+}
+
+.login-form2 form p{
+    font-size: 1.4rem;
+    color: #666;
+    padding: 1rem 0;
+}
+
+.login-form2 form p a{
+    color: #f39c12;
+}
+
+.login-form2 form .btn{
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.login-form2 form .btn:hover{
+    background: #444;
+}
+
+.login-form2 form .fa-times{
+    position: absolute;
+    top: 1.5rem; right: 2rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.login-form2 form .fa-times:hover{
+    color: #444;
+}
+
+/* ADMINISTRATOR SIGNUP FORM */
+
+.signup-form2{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: -120%; left: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-form2.popup{
+    top: 0;
+}
+
+.signup-form2 form{
+    width: 35rem;
+    background: #fff;
+    margin: 0 2rem;
+    padding: 1rem 3rem;
+     border-radius: .5rem;
+    box-shadow: 0 .1rem .3rem #333;
+    position: relative;
+}
+
+.signup-form2 form h3{
+    font-size: 2rem;
+    color: #f39c12;
+    padding: 1rem 0;
+}
+
+.signup-form2 form .box{
+    width: 100%;
+    padding: 1rem 0;
+    margin: 0px;
+    border-bottom: .2rem solid #666;
+    font-size: 1.6rem;
+    color: #333;
+    text-transform: none;
+}
+
+.signup-form2 form .box::placeholder{
+    text-transform: capitalize;
+}
+
+.signup-form2 form .box:focus{
+    border-color: #f39c12;
+}
+
+.signup-form2 form .box:nth-child(3){
+    margin-bottom: 5rem;
+}
+
+.signup-form2 form .btn{
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.signup-form2 form .btn:hover{
+    background: #444;
+}
+
+.signup-form2 form .fa-times{
+    position: absolute;
+    top: 1.5rem; right: 2rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.signup-form2 form .fa-times:hover{
+    color: #444;
+}
+
+/* THE CONTACT SECTION */
+
+.contact{
+    background: #111;
+}
+
+.contact .heading{
+    color: #fff;
+}
+
+.contact .row{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contact .row form{
+    flex: 1 1 50rem;
+    background: #222;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    align-items: flex-start;
+}
+
+.contact .row form .box{
+    height: 5rem;
+    width: 49%;
+    border: .1rem solid #eee;
+    padding: 0 1rem;
+    margin: 1rem 0;
+    font-size: 1.7rem;
+    color: #fff;
+    background: none;
+    text-transform: none;
+}
+
+.contact .row form .box:focus{
+    border-color: #f39c12;
+}
+
+.contact .row form .box::placeholder{
+    text-transform: capitalize;
+}
+
+.contact .row form .address{
+    height: 15rem;
+    padding: 1rem;
+    resize: none;
+    width: 100%;
+}
+
+.contact .row form .btn:hover{
+    background: #fff;
+    color: #333;
+}
+
+.contact .row .image img{
+    height: 60vh;
+    margin-top: 3rem;
+}
+
+
+@media (max-width:500px){
+    html{
+        font-size: 50%;
+    }
+
+    .contact .row form .box{
+        width: 100%;
+    }
+}
+
+.home{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    background: url(background.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    text-align: center;
+}
+
+.home h1{
+    font-size: 6rem;
+    color: #fff;
+}
+
+.home p{
+    font-size: 1.9rem;
+    color: rgb(247, 246, 241);
+    padding: 1rem 0;
+    width: auto;
+    display: flex;
+    background-color: #444;
+    opacity: 0.85;
+}
+
+.home .shape{
+    position: absolute;
+    bottom: -.2rem; left: 0;
+    height: 15rem;
+    width: 100%;    
+}
+
+.about{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.about .image{
+    flex: 1 1 40rem;
+}
+
+.about .image img{
+    height: 65vh;
+    width: 100%;
+}
+
+.about .content{
+    flex: 1 1 40rem;
+}
+
+.about .content h3{
+    font-size: 3.5rem;
+    color: #666;
+}
+
+.about .content p{
+    font-size: 1.5rem;
+    color: #666;
+    padding: 1rem 0;
+}
+
+.footer{
+    background: #333;
+}
+
+.footer .box-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.footer .box-container .box{
+    margin: 1.5rem;
+    text-align: center;
+    flex: 1 1 25rem;
+}
+
+.footer .box-container .box h3{
+    font-size: 2.5rem;
+    color: #fff;
+    padding: 1rem 0;
+}
+
+.footer .box-container .box p{
+    font-size: 1.7rem;
+    color: #eee;
+    padding: .7rem 0;
+}
+
+.footer .box-container .box p i{
+    padding-right: .5rem;
+    color: #f39c12;
+}
+
+.footer .box-container .box a{
+    font-size: 1.8rem;
+    display: block;
+    padding: .5rem 0;
+    color: #eee;
+}
+
+.footer .box-container .box a:hover{
+    text-decoration: underline;
+}
+
+.footer .credit{
+    padding: 2rem 1rem;
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    font-weight: normal;
+}
+
+.footer .credit a{
+    color: #f39c12;
+}
+
+
+
+
+/* THE BOOKING PAGE */
+
+.Body{
+    background: rgb(63, 64, 58);
+}
+
+.comp{
+    text-align: center;
+    font-size: large;
+    margin-top: 2%;
+}
+
+.comp a{
+    color: #ccc;
+
+}
+
+.home{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    background: url(background.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    text-align: center;
+}
+
+.container{
+    text-align: center;
+    color: #eee;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.loggedin{
+    text-align: center;
+    color: #eee;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.container1{
+    text-align: center;
+    color: #eee;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.container2{
+    text-align: center;
+    color: #eee;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+h2{
+    text-align: center;
+    color: #f39c12;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.book-form{
+    margin-top: 5%;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-form form{
+    width: 35rem;
+    background: #fff;
+    margin: 0 2rem;
+    padding: 1rem 3rem;
+     border-radius: .5rem;
+    box-shadow: 0 .1rem .3rem #333;
+    position: relative;
+}
+
+.Body h1{
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    padding: 1rem 0;
+}
+
+.book-form form label{
+    display: block;
+    font-size: 1.5rem;
+}
+
+.book-form form .book{
+    width: 100%;
+    border-bottom: .2rem solid #666;
+    font-size: 1.6rem;
+    color: rgb(196, 155, 19);
+    text-transform: none;
+    padding: .1rem 1rem;
+    font-size: 1.5rem;
+    color: #fff;
+    background: var(--gradient);
+    border-radius: 5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+}
+
+.book-form form .book:hover{
+    color: #444;
+}
+
+/* UPDATE COMPUTER SECTION */
+
+.Body1{
+    background: rgb(239, 244, 217);
+}
+
+section .add{
+    margin-top: 5%;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section .update{
+    margin-top: 5%;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section textarea{
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+.Body1 h1{
+    color: #6f490b;
+    font-size: x-large;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.Body1 h2{
+    color: #6f490b;
+    font-size: large;
+}
+
+.Body1 .computer{
+    border: 2px solid #ccc;
+    padding: 12px 20px;
+}

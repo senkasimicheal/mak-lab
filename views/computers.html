@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update computers</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="Body1">
+
+    <nav>
+           
+        <a href="index.html">
+            <button type="button" class="btn btn-default btn-sm" action="/logout">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+            </button>
+        </a>
+
+    </nav>
+
+    <h1>update the computers in the lab</h1>
+
+    <section>
+
+        <div class="add">
+            <form action="/addComputer" method="post">
+                <h2>Add a computer</h2>
+                <input class="computer" type="text" placeholder="computer name" name="CompName" required>
+                <textarea required name="details" placeholder="type computer details here" id="" cols="30" rows="10"></textarea>
+                <input required type="submit" class="btn">
+            </form>
+        </div>
+
+        <div class="update">
+            <form action="/removeComputer" method="post">
+                <h2>Remove a computer</h2>
+                <input class="computer" type="text" placeholder="computer name" name="CompName" required>
+                <input required type="submit" class="btn">
+            </form>
+        </div>
+
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="script.js"></script>
+    
+</body>
+</html>

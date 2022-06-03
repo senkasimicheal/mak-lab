@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ssp computer lab</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sansz:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+
+    <header>
+      
+      <div id="menu" class="fas fa-bars"></div>
+
+      <i id="logo" class="fas fa-user-graduate"></i>
+
+      <nav class="navbar">
+        <ul>
+            <li><a class="active" href="#home">home</a></li>
+            <li><a href="#about">about</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- drop down menu -->
+      <div class="dd">
+
+        <li id="dd-btn" class="fas fa-user-circle">Signin</li>
+
+        <div class="dd-content">
+
+          <li id="login">student</li>
+          <li id="login1">administrator</li>
+
+        </div>
+
+      </div>
+
+    </header>
+
+    <!-- STUDENT LOGIN FORM -->
+    <div class="login-form">
+
+      <form method="post" action="/login">
+        <h3>Student login</h3>
+        <input required type="email" name="Email" placeholder="Email e.g. example@domain" class="box">
+        <input required type="password" name="password1" placeholder="password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <p>Don't have an account? <a href="#" id="signup">Register now</a></p>
+        <p>forgot password? <a href="#">click here</a></p>
+        <input type="submit" class="btn" value="login">
+        <i class="fas fa-times"></i>
+      </form>
+
+
+    </div>
+
+    <!-- STUDENT REGISTRATION FORM -->
+    <div class="signup-form">
+
+      <form method="post" action="/register">
+        <h3>Register your account</h3>
+        <input required type="name" name="Name" placeholder="full name" class="box">
+        <input required id="reg" type="text" name="reg_number" placeholder="registration number" class="box">
+        <input required type="number" name="stdt_number" placeholder="student number" class="box">
+        <input required type="text" name="Course" placeholder="course" class="box">
+        <input required type="email" name="Email" placeholder="email e.g. example@domain" class="box">
+        <input required type="password" name="password1" placeholder="Create password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input required type="password" name="password2" placeholder="Confirm password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input required type="submit" class="btn" value="signup">
+        <i class="fas fa-times"></i>
+      </form>
+
+    </div>
+
+    <!-- ADMINISTRATOR LOGIN FORM -->
+    <div class="login-form2">
+
+      <form action="/adminLogin" method="post">
+        <h3>Admin login</h3>
+        <input required type="email" name="user_name1" placeholder="Email e.g. example@domain" class="box">
+        <input required type="password" name="password01" placeholder="password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <p>Don't have an account? <a href="#" id="signup1">Register now</a></p>
+        <p>forgot password? <a href="#">click here</a></p>
+        <input type="submit" class="btn" value="login">
+        <i class="fas fa-times"></i>
+      </form>
+
+
+    </div>
+
+    <!-- ADMINISTRATOR REGISTRATION -->
+
+    <div class="signup-form2">
+
+      <form action="/sign_up" method="POST">
+        <h3>Register your account</h3>
+        <input required type="name" name="Name1" placeholder="full name" class="box">
+        <input required type="email" name="Email1" placeholder="staff email address" class="box">
+        <input required type="password" name="password01" placeholder="Create password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input required type="password" name="password02" placeholder="Confirm password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input type="submit" class="btn" value="signup">
+        <i class="fas fa-times"></i>
+      </form>
+
+    </div>
+
+    <section class="home" id="home">
+
+      <h1>The computer laboratory system</h1>
+      <p>A computer lab is a space where computer services are provided to a defined community. This system will help you book for a computer to use when you go to the lab
+        . Register yourself to start by clicking on the signin button in the top right corner, you will see register now. Thank you
+      </p>
+
+      <div class="shape"></div>
+    </section>
+
+
+    <section class="about" id="about">
+
+      <div class="image">
+        <img src="computer2.jpg" alt="">
+      </div>
+
+      <div class="content">
+        <h3>Why you should start using the computer lab</h3>
+        <p>In response to a rising number of students with personal laptops, educators and administrators are questioning the need for computer labs. However, while access to technology is changing their function, computer labs remain relevant in today’s institutions for a number of reasons. For starters, computer labs create inclusive, structured learning environments where students can prepare for a tech-heavy future.</p>
+        <p>Full computer lab workstations deliver greater computing power and more screen space than mobile devices. They offer better ergonomics and full-sized keyboards. PCs with powerful processors are ideal, and often a must-have, for subjects like advanced programming, engineering, and video editing. Full-sized keyboards make for easier typing of long papers. The health benefits of a full-sized monitor are not trivial. Correct ergonomics while computing is critical to reducing strain, discomfort and long-term injury like herniated discs. The top of a display should be at or slightly below eye level. Laptops sit much lower on a work surface.</p>
+        <a href="https://www.viewsonic.com/library/education/school-computer-labs-matter/#:~:text=Computer%20labs%20provide%20a%20time,home%20and%20in%20the%20classroom."><button class="btn">learn more</button></a>
+      </div>
+
+    </section>
+
+    <section class="contact" id="contact">
+
+      <h1 class="heading">contact us</h1>
+
+      <div class="row">
+        
+        <form action="">
+          <input required type="text" placeholder="full name" class="box">
+          <input required type="email" placeholder="your email" class="box">
+          <input required type="password" placeholder="your password" class="box">
+          <input required type="number" placeholder="your student number" class="box">
+          <textarea required name="" id="" cols="30" rows="10" class="box address" placeholder="your address"></textarea>
+          <input type="submit" class="btn" value="send now">
+        </form>
+
+        <div class="image">
+          <img src="contact.jpg" alt="">
+        </div>
+      </div>
+
+    </section>
+
+    <div class="footer">
+
+      <div class="box-container">
+
+        <div class="box">
+          <h3>Makerere University</h3>
+          <a href="https://en.wikipedia.org/wiki/Kampala">Kampala</a>
+          <a href="https://en.wikipedia.org/wiki/Uganda">Uganda</a>
+        </div>
+
+        <div class="box">
+          <h3>quick links</h3>
+          <a href="#home">home</a>
+          <a href="#about">about</a>
+          <a href="#contact">contact</a>
+        </div>
+
+        <div class="box">
+          <h3>Contact info</h3>
+          <p><i class="fas fa-map-marker-alt"></i>kampala, uganda</p>
+          <p><i class="fas fa-envelope"></i> example@gmail.com </p>
+          <p><i class="fas fa-phone"></i> +256-772-726-380 </p>
+        </div>
+
+      </div>
+      <h1 class="credit">created by <a href="https://ug.linkedin.com/in/micheal-senkasi-846182233?trk=public_profile_browsemap">Senkasi Micheal</a> all rights reserved.</h1>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script src="script.js"></script>
+
+  </body>
+</html>

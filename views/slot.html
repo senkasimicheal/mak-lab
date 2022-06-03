@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>book a slot</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="Body">
+    <nav>
+      <a href="index.html">
+        <button type="button" class="btn btn-default btn-sm" action="/logout">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </button>
+      </a>
+    </nav>
+
+    <h1>Welcome to the computer lab</h1>
+    <h3 class="loggedin">Logged in as</h3>
+    <div class="container"></div>
+
+    <script>
+      const container = document.querySelector(".container");
+
+      const getData = async () => {
+        const raw_data = await fetch("/getSession");
+        const data = await raw_data.json();
+
+        const boolean = true;
+
+        console.log(data["user"]);
+        container.innerHTML = boolean ? `${data["user"]}` : `no users`;
+        return data;
+      };
+
+      getData();
+    </script>
+
+    <div class="book-form">
+      <form action="/slot" method="post">
+        <h2>book for a slot from here</h2>
+        <label for="appt">Choose start time:</label>
+        <input
+          type="time"
+          id="appt"
+          name="start_time"
+          min="08:00"
+          max="17:00"
+          required
+        />
+        <label for="appt">Choose stop time:</label>
+        <input
+          type="time"
+          id="appt"
+          name="stop_time"
+          min="08:00"
+          max="17:00"
+          required
+        />
+        <input type="submit" class="book" value="Book now" />
+        <p></p>
+      </form>
+    </div>
+
+    <div>
+      <h2>You have booked computer with the following details</h2>
+
+      <div class="container1"></div>
+      <div class="container2"></div>
+      <script>
+        const container1 = document.querySelector(".container1");
+        const container2 = document.querySelector(".container2");
+
+        const getComputer = async () => {
+          const raw_computer = await fetch("/getComputer");
+          const data1 = await raw_computer.json();
+
+          const boolean = true;
+
+          console.log(data1["comp"].CompName);
+          console.log(data1["comp"].details);
+          container1.innerHTML = boolean ? `${data1["comp"].CompName}` : `no computers`;
+          container2.innerHTML = boolean ? `${data1["comp"].details}` : `no computers`;
+          return data1;
+        };
+        
+        getComputer();
+      </script>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
