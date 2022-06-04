@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>update computers</title>
 
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="/favicon.ico" type="image/x-icon" rel="icon" />
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-     -->
+    
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -28,7 +28,7 @@
 
     <h1>update the computers in the lab</h1>
 
-    <section>
+    <section class="admin">
 
         <div class="add">
             <form action="/addComputer" method="post">
@@ -47,6 +47,44 @@
             </form>
         </div>
 
+        <h2>STUDENTS WITH APPOINTMENTS</h2>
+        <div>
+            <form action="/decline" method="post">
+                <input class="decline" type="text" placeholder="Enter computer ID to decline appointment" name="CompID" required>
+                <input required type="submit" class="btn">
+            </form>
+        </div>
+        <button id="btn">Click to show appointments</button>
+        <div class="bookers">
+            <p id="container3"></p>
+        </div>
+
+        <script>
+            const btn = document.getElementById('btn');
+
+            btn.addEventListener('click', () => {
+            const box = document.getElementById('container3');
+            box.style.display = 'block';
+            });
+        </script>
+
+        <script>
+            const container3 = document.querySelector("#container3");
+            
+            const getBooked = async () => {
+                const raw_computer = await fetch("/getBooked");
+                const book = await raw_computer.json();
+                const boolean = true;
+
+                for (let i = 0; i < book["Booked"].length; i++) {
+                    container3.innerHTML += "<p>" +(i+1)+ " " + "NAME: " + book["Booked"][i].Name+ "</p><br>";
+                    container3.innerHTML += "<p>" +"COMPUTER ID: "+ book["Booked"][i].computer_id+ "</p><br>";
+                }
+            };
+                    
+            getBooked();
+        </script>
+        
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

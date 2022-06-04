@@ -808,6 +808,17 @@ h2{
     font-weight: bold;
 }
 
+.d{
+    text-decoration: underline;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+    color: #f39c12;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+
 .book-form{
     margin-top: 5%;
     height: 100%;
@@ -831,7 +842,6 @@ h2{
 }
 
 .Body h1{
-    text-align: center;
     font-size: 2rem;
     color: white;
     padding: 1rem 0;
@@ -868,31 +878,32 @@ h2{
     background: rgb(239, 244, 217);
 }
 
-section .add{
-    margin-top: 5%;
+.admin{
+    margin-top: -7%;
+    clear: both;
+}
+
+.admin .add{
+    margin-top: 1%;
     height: 100%;
     width: 100%;
     position: relative;
     left: 0;
     z-index: 1000;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-section .update{
-    margin-top: 5%;
+.admin .update{
+    margin-top: 1%;
     height: 100%;
     width: 100%;
     position: relative;
     left: 0;
     z-index: 1000;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-section textarea{
+.admin textarea{
     width: 100%;
     height: 150px;
     padding: 12px 20px;
@@ -902,6 +913,10 @@ section textarea{
     background-color: #f8f8f8;
     font-size: 16px;
     resize: none;
+}
+
+.admin input{
+    margin-bottom: 1%;
 }
 
 .Body1 h1{
@@ -914,9 +929,50 @@ section textarea{
 .Body1 h2{
     color: #6f490b;
     font-size: large;
+    text-align: left;
+    margin-top: 2%;
 }
 
 .Body1 .computer{
     border: 2px solid #ccc;
     padding: 12px 20px;
+}
+
+#btn{
+    padding: .05rem 2rem;
+    font-size: 2rem;
+    color: #fff;
+    background: var(--gradient);
+    border-radius: 5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+}
+
+.Body1 .decline{
+    border: 2px solid #ccc;
+    padding: 12px 30px;
+    width: 320px;
+}
+
+.Body1 .bookers{
+    border: 2px solid #ccc;
+    padding: 12px 20px;
+    width: 280px;
+    margin-top: 1%;
+}
+
+#btn:hover{
+    cursor: pointer;
+    background: #444;
+}
+
+#container3{
+    margin-top: 1%;
+    font-size: 15px;
+    display: none;
+}
+
+section .bookers{
+    text-shadow: #111;
 }

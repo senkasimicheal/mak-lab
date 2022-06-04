@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ssp computer lab</title>
 
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sansz:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link href="/favicon.ico" type="image/x-icon" rel="icon" />
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-     -->
+    
     <link rel="stylesheet" href="style.css">
 
   </head>
@@ -53,7 +54,7 @@
       <form method="post" action="/login">
         <h3>Student login</h3>
         <input required type="email" name="Email" placeholder="Email e.g. example@domain" class="box">
-        <input required type="password" name="password1" placeholder="password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input required type="password" name="password1" placeholder="password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters">
         <p>Don't have an account? <a href="#" id="signup">Register now</a></p>
         <p>forgot password? <a href="#">click here</a></p>
         <input type="submit" class="btn" value="login">
@@ -73,8 +74,8 @@
         <input required type="number" name="stdt_number" placeholder="student number" class="box">
         <input required type="text" name="Course" placeholder="course" class="box">
         <input required type="email" name="Email" placeholder="email e.g. example@domain" class="box">
-        <input required type="password" name="password1" placeholder="Create password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-        <input required type="password" name="password2" placeholder="Confirm password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input required type="password" name="password1" placeholder="Create password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters">
+        <input required type="password" name="password2" placeholder="Confirm password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters">
         <input required type="submit" class="btn" value="signup">
         <i class="fas fa-times"></i>
       </form>
@@ -87,7 +88,7 @@
       <form action="/adminLogin" method="post">
         <h3>Admin login</h3>
         <input required type="email" name="user_name1" placeholder="Email e.g. example@domain" class="box">
-        <input required type="password" name="password01" placeholder="password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input required type="password" name="password01" placeholder="password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters">
         <p>Don't have an account? <a href="#" id="signup1">Register now</a></p>
         <p>forgot password? <a href="#">click here</a></p>
         <input type="submit" class="btn" value="login">
@@ -105,8 +106,8 @@
         <h3>Register your account</h3>
         <input required type="name" name="Name1" placeholder="full name" class="box">
         <input required type="email" name="Email1" placeholder="staff email address" class="box">
-        <input required type="password" name="password01" placeholder="Create password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-        <input required type="password" name="password02" placeholder="Confirm password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input required type="password" name="password01" placeholder="Create password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters">
+        <input required type="password" name="password02" placeholder="Confirm password" class="box" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters">
         <input type="submit" class="btn" value="signup">
         <i class="fas fa-times"></i>
       </form>

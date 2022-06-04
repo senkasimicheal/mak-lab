@@ -6,16 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>book a slot</title>
 
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-    /> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="/favicon.ico" type="image/x-icon" rel="icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -76,9 +69,11 @@
     </div>
 
     <div>
-      <h2>You have booked computer with the following details</h2>
+      <h2 class="d">You have booked computer with the following details</h2>
+      <h2>Computer name</h2>
 
       <div class="container1"></div>
+      <h2>Computer ID</h2>
       <div class="container2"></div>
       <script>
         const container1 = document.querySelector(".container1");
@@ -90,10 +85,10 @@
 
           const boolean = true;
 
-          console.log(data1["comp"].CompName);
-          console.log(data1["comp"].details);
-          container1.innerHTML = boolean ? `${data1["comp"].CompName}` : `no computers`;
-          container2.innerHTML = boolean ? `${data1["comp"].details}` : `no computers`;
+          console.log(data1["comp"]);
+          console.log(data1["id"]);
+          container1.innerHTML = boolean ? `${data1["comp"]}` : `no computers`;
+          container2.innerHTML = boolean ? `${data1["id"]}` : `no computers`;
           return data1;
         };
         

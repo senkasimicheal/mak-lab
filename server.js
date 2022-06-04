@@ -15,7 +15,7 @@ const port = process.env.PORT || 5000
 const saltRounds = 10;
 
 // creating mins from milliseconds
-const Time = 300000;
+const Time = 1000*24*60*60;
 
 //session middleware
 app.use(cors());
@@ -34,6 +34,7 @@ app.use(express.json());
 // RENDERING HTML FILES
 var engine = require("consolidate");
 const { default: isEmail } = require("validator/lib/isemail");
+const { json } = require("express");
 
 app.set("views", __dirname + "/views");
 app.engine("html", engine.mustache);
@@ -86,28 +87,34 @@ var userSchema = new Mongoose.Schema({
     validate: [isEmail, "Please provide a valid email"],
   },
   password1: String,
-  password2: String,
+  computer_id: {
+    type: String,
+    default: ''
+  },
+  CompName: {
+    type: String,
+    default: ''
+  },
+  details: {
+    type: String,
+    default: ''
+  },
+  booking_date: {
+    type: Date,
+    default: ''
+  },
+  start_time: {
+    type: String,
+    default: ''
+  },
+  stop_time: {
+    type: String,
+    default: ''
+  }
 });
 
 // CREATE A DATA MODEL FOR STUDENT DETAILS
 const User = Mongoose.model("user", userSchema);
-
-// CREATE A DATA SCHEMA FOR BOOKING DETAILS
-var bookingSchema = new Mongoose.Schema({
-  booking_date: {
-    type: Date,
-    required: true,
-    default: Date.now(),
-  },
-  Name: String,
-  reg_number: String,
-  start_time: String,
-  stop_time: String,
-  bookedComputer: String,
-  computerDetails: String
-});
-
-const Book = Mongoose.model("booking", bookingSchema);
 
 // CREATE A DATA SCHEMA FOR ADMINISTRATORS
 var adminSchema = new Mongoose.Schema({
@@ -136,6 +143,10 @@ var computerSchema = new Mongoose.Schema({
     unique: true,
   },
   details: String,
+  bookers_id: {
+    type: String,
+    default: ''
+  }
 });
 
 const Computer = Mongoose.model("computer", computerSchema);
@@ -179,6 +190,10 @@ app.get("/removeComputer", function (req, res) {
   res.render("computers.html");
 });
 
+app.get("/decline", function (req, res) {
+  res.render("computers.html");
+});
+
 // STUDENT SIGNUP
 app.post("/register", async (req, res) => {
   console.log(req.body);
@@ -204,7 +219,7 @@ app.post("/register", async (req, res) => {
           Email: req.body.Email,
           password1: hashedPwd,
         });
-        res.redirect("/slot");
+        res.redirect("/login");
       }
     }
   } catch (error) {
@@ -216,6 +231,7 @@ app.post("/register", async (req, res) => {
 // STUDENT LOGIN
 app.post("/login", async (req, res) => {
   try {
+    var msg
     const user = await User.findOne({ Email: req.body.Email });
     console.log(user);
     if (user) {
@@ -256,48 +272,105 @@ app.get("/list", async (req, res) => {
 // BOOKING DETAILS
 app.post("/slot", async (req, res) => {
   console.log(req.body);
-  // const computers = await Computer.updateOne({CompName: req.body.CompName});
-  
+  const list_of_computers = await Computer.find({"bookers_id": ""});
+  const checkUser = await User.findOne({Email: req.session.userid.Email});
+
+  const index1 = req.body.start_time.indexOf(":");
+  const hours1 = req.body.start_time.substr(0, index1);
+  const minute1 = req.body.start_time.substr(index1 + 1);
+
+  const index2 = req.body.stop_time.indexOf(":");
+  const hours2 = req.body.stop_time.substr(0, index1);
+  const minute2 = req.body.stop_time.substr(index1 + 1); 
+
   try {
-    const list_of_computers = await Computer.aggregate([
-      { $sample: { size: 1 } },
-    ]);
-    const bookedComp = list_of_computers[0];
-    const computerBook = await Book.findOne({ bookedComputer: bookedComp.CompName });
-    if(computerBook){
-      res.send("Try to book again")
+
+    if(hours2 <= 5){
+      var TwtFourhrs = hours2 + 12;
+      if((TwtFourhrs-hours1) >= 0){
+        const Workhours = TwtFourhrs - hours1;
+        const Workmins = minute2 - minute1;
+        const Duration = Workhours + (Workmins/60);
+  
+        if((Duration >= (1/6)) && (Duration <= 2)){
+          if(checkUser.computer_id == ""){
+            if(list_of_computers.length !== 0){
+              const user_id = String(checkUser._id)
+              const randomItem = list_of_computers[Math.floor(Math.random()*list_of_computers.length)];
+              const first_free_comp_id = String(randomItem._id)
+              await User.updateOne({_id: checkUser._id}, {computer_id: first_free_comp_id,
+                CompName: randomItem.CompName, details: randomItem.details,
+                booking_date: Date.now(), start_time: req.body.start_time,
+                stop_time: req.body.stop_time});
+                
+              await Computer.updateOne({_id: randomItem._id}, {bookers_id: user_id});
+              res.redirect("/slot");
+            }else{
+                console.log("No free computers");
+              }
+          }else{
+              console.log("already booked");
+            }
+        }else{
+          console.log("Duration can not go below 10 minutes or it can not be greater than 2 hours");
+        }
+      }else{
+        console.log("Invalid!! Starting time is bigger")
+      }
     }else{
-      session = req.session;
-      session.userid1 = bookedComp;
-      console.log(req.session);
-      const bookingResult = await Book.create({
-        booking_date: Date.now(),
-        Name: req.session.userid.Name,
-        reg_number: req.session.userid.reg_number,
-        start_time: req.body.start_time,
-        stop_time: req.body.stop_time,
-        bookedComputer: bookedComp.CompName,
-        computerDetails: bookedComp.details
-      });
-      res.redirect("/slot");
+      if((hours2-hours1) >= 0){
+        const Workhours = hours2 - hours1;
+        const Workmins = minute2 - minute1;
+        const Duration = Workhours + (Workmins/60);
+  
+        if((Duration >= (1/6)) && (Duration <= 2)){
+          if(checkUser.computer_id == ""){
+            if(list_of_computers.length !== 0){
+              const user_id = String(checkUser._id)
+              const randomItem = list_of_computers[Math.floor(Math.random()*list_of_computers.length)];
+              const first_free_comp_id = String(randomItem._id)
+              await User.updateOne({_id: checkUser._id}, {computer_id: first_free_comp_id,
+                CompName: randomItem.CompName, details: randomItem.details,
+                booking_date: Date.now(), start_time: req.body.start_time,
+                stop_time: req.body.stop_time});
+                
+              await Computer.updateOne({_id: randomItem._id}, {bookers_id: user_id});
+              res.redirect("/slot");
+            }else{
+                console.log("No free computers");
+              }
+          }else{
+              console.log("already booked");
+            }
+        }else{
+          console.log("Duration can not go below 10 minutes or it can not be greater than 2 hours");
+        }
+      }else{
+        console.log("Invalid!! Starting time is bigger")
+      }
     }
     
+    
   } catch (error) {
-    console.log(error);
-    res.status(500).send("A problem occurred");
-  }
-});
+      console.log(error);
+      res.status(500).send("A problem occurred");
+    }
+ });
 
 // DISPLAYING BOOKED COMPUTER
 app.get("/getComputer", async (req, res) => {
+  const user = await User.findOne({ Email: req.session.userid.Email });
   res.json({
-    comp: req.session.userid1,
-  });
+    comp: user.CompName,
+    id: user.computer_id
+  })
 });
 
 app.get("/list1", async (req, res) => {
+  const user = await User.findOne({ Email: req.session.userid.Email });
   res.render("slot.html", {
-    list1: req.session.userid1.CompName,
+    list1: user.CompName,
+    list2: user.computer_id
   });
 });
 
@@ -387,7 +460,46 @@ app.post('/removeComputer', async (req, res)=>{
     console.log(error);
     res.status(500).send("Internal Server error Occured");
   }
+});
+
+//DECLINING APPOINTMENT
+app.post('/decline', async (req, res)=>{
+  console.log(req.body);
+  try {
+    const decline = await User.findOne({computer_id: req.body.CompID});
+    if(decline){
+      await User.updateOne({computer_id: req.body.CompID}, {computer_id: "",
+        CompName: "", details: "",
+        booking_date: "", start_time: "",
+        stop_time: ""});
+        
+      await Computer.updateOne({_id: req.body.CompID}, {bookers_id: ""});
+      res.redirect("/decline");
+    }else{
+      console.log("Wrong computer ID");
+    }
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server error Occured");
+  }
 })
+
+// DISPLAYING BOOKED COMPUTERS AND USERS
+app.get("/getBooked", async (req, res) => {
+  const list_of_computers = await User.find({"computer_id": {"$exists" : true, "$ne" : ""}});
+  res.json({
+    Booked: list_of_computers,
+  })
+});
+
+app.get("/list2", async (req, res) => {
+  const list_of_computers = await User.find({"computer_id": {"$exists" : true, "$ne" : ""}});
+  res.render("computers.html", {
+    list1: list_of_computers,
+  });
+});
+
 
 app.listen(port, ()=> {
   console.log("Server is running on 5000");
