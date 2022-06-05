@@ -22,16 +22,18 @@
     </nav>
 
     <h1 class="welcome">Welcome to the computer lab</h1>
+    <P id="loginSuccess"></P>
     <h3 class="loggedin">Logged in as</h3>
     <div class="container"></div>
 
     <script>
+      const container3 = document.querySelector("#loginSuccess");
       const container = document.querySelector(".container");
       const getData = async () => {
         const raw_data = await fetch("/getSession");
         const data = await raw_data.json();
         const boolean = true;
-        console.log(data["user"]);
+        loginSuccess.innerHTML += "<p>"+ "LOGIN WAS SUCCESSFUL" +"</p><br>";
         container.innerHTML = boolean ? `${data["user"]}` : `no users`;
         return data;
       };
@@ -64,8 +66,6 @@
           const raw_computer = await fetch("/getComputer");
           const data1 = await raw_computer.json();
           const boolean = true;
-          console.log(data1["comp"]);
-          console.log(data1["id"]);
           container1.innerHTML = boolean ? `${data1["comp"]}` : `no computers`;
           container2.innerHTML = boolean ? `${data1["id"]}` : `no computers`;
           return data1;

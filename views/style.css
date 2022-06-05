@@ -955,3 +955,97 @@ section .bookers{
 .welcome{
     text-align: center;
 }
+
+section .getstarted{
+    text-transform: none;
+    font-style: oblique;
+    color: #f39c12;
+    font-weight: bold;
+}
+
+section .description{
+    text-transform: none;
+}
+
+section .whythis{
+    text-transform: none;
+}
+
+#loginSuccess{
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #f39c12;
+}
+
+#loginSuccess{
+    animation: fadeInAnimation ease 10s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.yourpsd{
+    height: 10%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-button{
+    padding: .05rem 1rem;
+    font-size: 2rem;
+    background: var(--gradient);
+    border-radius: 5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+}
+
+.btn2{
+    padding: .05rem 1rem;
+    font-size: 2rem;
+    background: var(--gradient);
+    border-radius: 5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+}
+
+.resetpsd{
+    background: rgb(239, 244, 217);
+}
+
+.youremail{
+    border: 2px solid #ccc;
+    padding: 6px 20px;
+    text-transform: none;
+}
+
+#OTP{
+    display: none;
+    height: 10%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.otp{
+    border: 2px solid #ccc;
+    padding: 6px 20px;
+}
+
+#show{
+    display: none;
+}
