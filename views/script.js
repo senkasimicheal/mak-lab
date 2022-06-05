@@ -4,7 +4,6 @@ $(document).ready(function(){
         $('.navbar').toggleClass('nav-toggle');
     });
 
-    // STUDENT LOGIN
     $('#login').click(function(){
         $('.login-form').addClass('popup');
     });
@@ -13,7 +12,6 @@ $(document).ready(function(){
         $('.login-form').removeClass('popup');
     });
 
-    // STUDENT REGISTRATION
     $('#signup').click(function(){
         $('.login-form').removeClass('popup');
         $('.signup-form').addClass('popup');
@@ -23,7 +21,6 @@ $(document).ready(function(){
         $('.signup-form').removeClass('popup');
     });
 
-    // ADMINISTRATOR LOGIN
     $('#login1').click(function(){
         $('.login-form2').addClass('popup');
     });
@@ -32,7 +29,6 @@ $(document).ready(function(){
         $('.login-form2').removeClass('popup');
     });
 
-    // ADMINISTRATOR REGISTRATION
     $('#signup1').click(function(){
         $('.login-form2').removeClass('popup');
         $('.signup-form2').addClass('popup');
@@ -41,7 +37,6 @@ $(document).ready(function(){
     $('.signup-form2 form .fa-times').click(function(){
         $('.signup-form2').removeClass('popup');
     });
-
 
     $(window).on('load scroll',function(){
 
@@ -52,7 +47,4 @@ $(document).ready(function(){
 
         $('.signup-form').removeClass('popup');
     });
-
 });
-
-

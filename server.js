@@ -7,17 +7,14 @@ const  bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const sessions = require("express-session");
 
-//password encryption
 bcrypt = require("bcrypt");
 
 const port = process.env.PORT || 5000
 
 const saltRounds = 10;
 
-// creating mins from milliseconds
 const Time = 1000*24*60*60;
 
-//session middleware
 app.use(cors());
 app.use(
   sessions({
@@ -28,10 +25,8 @@ app.use(
   })
 );
 
-// parsing the incoming data
 app.use(express.json());
 
-// RENDERING HTML FILES
 var engine = require("consolidate");
 const { default: isEmail } = require("validator/lib/isemail");
 const { json } = require("express");
@@ -39,31 +34,18 @@ const { json } = require("express");
 app.set("views", __dirname + "/views");
 app.engine("html", engine.mustache);
 app.set("view engine", "html");
-// RENDERING HTML FILES
 
 app.use(express.urlencoded({ extended: false }));
 
-// Telling the express module that the public dir has all of our site assets
-
 app.use(express.static(__dirname + "/views"));
 
-// cookie parser middleware
 app.use(cookieParser());
 
-// a variable to save a session
 var session;
-var session1;
 
-var localDB = "mongodb://localhost/laboratoryDB";
-var remoteDB =
-  "mongodb+srv://Senkasi:senkasimicheal@cluster0.rivod.mongodb.net/ComputerLab";
-Mongoose.connect(
-  remoteDB,
-  { useNewUrlParser: true },
-  { useUnifiedTopology: true }
-);
+var remoteDB = "mongodb+srv://Senkasi:senkasimicheal@cluster0.rivod.mongodb.net/ComputerLab";
+Mongoose.connect(remoteDB, { useNewUrlParser: true },{ useUnifiedTopology: true });
 
-// CREATE A DATA SCHEMA FOR STUDENT DETAILS
 var userSchema = new Mongoose.Schema({
   registration_date: {
     type: Date,
@@ -113,10 +95,8 @@ var userSchema = new Mongoose.Schema({
   }
 });
 
-// CREATE A DATA MODEL FOR STUDENT DETAILS
 const User = Mongoose.model("user", userSchema);
 
-// CREATE A DATA SCHEMA FOR ADMINISTRATORS
 var adminSchema = new Mongoose.Schema({
   registration_date: {
     type: Date,
@@ -136,7 +116,6 @@ var adminSchema = new Mongoose.Schema({
 
 const Admin = Mongoose.model("admin", adminSchema);
 
-// COMPUTERS SCHEMA
 var computerSchema = new Mongoose.Schema({
   CompName: {
     type: String,
@@ -151,60 +130,16 @@ var computerSchema = new Mongoose.Schema({
 
 const Computer = Mongoose.model("computer", computerSchema);
 
-//but still the index.html is not rendering with css and js
 app.get("/register", function (req, res) {
   res.render("index.html");
 });
-
-app.get("/login", function (req, res) {
-  session = req.session;
-  res.render("index.html");
-});
-
-app.get("/slot", function (req, res) {
-  res.render("slot.html");
-});
-
-app.get("/sign_up", function (req, res) {
-  res.render("index.html");
-});
-
-app.get("/adminLogin", function (req, res) {
-  res.render("index.html");
-});
-
-app.get("/addComputer", function (req, res) {
-  Computer.find((err, docs) => {
-    if (!err) {
-      res.render("computers.html", {
-        data: docs,
-      });
-    } else {
-      console.log("Failed to retrieve the Course List: " + err);
-    }
-  });
-  // res.render('computers.html')
-});
-
-app.get("/removeComputer", function (req, res) {
-  res.render("computers.html");
-});
-
-app.get("/decline", function (req, res) {
-  res.render("computers.html");
-});
-
-// STUDENT SIGNUP
 app.post("/register", async (req, res) => {
-  console.log(req.body);
   try {
     const Exist = await User.findOne({ Email: req.body.Email });
     const Exist1 = await User.findOne({ reg_number: req.body.reg_number });
     const Exist2 = await User.findOne({ stdt_number: req.body.stdt_number });
     if (Exist || Exist1 || Exist2) {
-      res.send(
-        "User already exists! Check your email, student number or registration number and try again"
-      );
+      res.send("User already exists! Check your email, student number or registration number and try again");
     } else {
       if (req.body.password1 != req.body.password2) {
         res.send("Passwords don't match");
@@ -223,24 +158,22 @@ app.post("/register", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
     res.status(500).send("Internal Server error Occured");
   }
 });
 
-// STUDENT LOGIN
+app.get("/login", function (req, res) {
+  session = req.session;
+  res.render("index.html");
+});
 app.post("/login", async (req, res) => {
   try {
-    var msg
     const user = await User.findOne({ Email: req.body.Email });
-    console.log(user);
     if (user) {
       const cmp = await bcrypt.compare(req.body.password1, user.password1);
       if (cmp) {
-        //   ..... further code to maintain authentication like jwt or sessions
         session = req.session;
         session.userid = user;
-        console.log(req.session);
         res.redirect("/slot");
       } else {
         res.send("Wrong password.");
@@ -249,13 +182,10 @@ app.post("/login", async (req, res) => {
       res.send("Wrong username or User does not exist.");
     }
   } catch (error) {
-    console.log(error);
     res.status(500).send("Internal Server error Occured");
   }
 });
 
-
-// DISPLAYING LOGGED IN USER NAME
 app.get("/getSession", async (req, res) => {
   res.json({
     user: req.session.userid.Name,
@@ -268,30 +198,25 @@ app.get("/list", async (req, res) => {
   });
 });
 
-
-// BOOKING DETAILS
+app.get("/slot", function (req, res) {
+  res.render("slot.html");
+});
 app.post("/slot", async (req, res) => {
-  console.log(req.body);
   const list_of_computers = await Computer.find({"bookers_id": ""});
   const checkUser = await User.findOne({Email: req.session.userid.Email});
-
   const index1 = req.body.start_time.indexOf(":");
   const hours1 = req.body.start_time.substr(0, index1);
   const minute1 = req.body.start_time.substr(index1 + 1);
-
   const index2 = req.body.stop_time.indexOf(":");
   const hours2 = req.body.stop_time.substr(0, index1);
   const minute2 = req.body.stop_time.substr(index1 + 1); 
-
   try {
-
     if(hours2 <= 5){
       var TwtFourhrs = hours2 + 12;
       if((TwtFourhrs-hours1) >= 0){
         const Workhours = TwtFourhrs - hours1;
         const Workmins = minute2 - minute1;
         const Duration = Workhours + (Workmins/60);
-  
         if((Duration >= (1/6)) && (Duration <= 2)){
           if(checkUser.computer_id == ""){
             if(list_of_computers.length !== 0){
@@ -306,23 +231,22 @@ app.post("/slot", async (req, res) => {
               await Computer.updateOne({_id: randomItem._id}, {bookers_id: user_id});
               res.redirect("/slot");
             }else{
-                console.log("No free computers");
+              res.send("No free computers");
               }
           }else{
-              console.log("already booked");
+            res.send("already booked");
             }
         }else{
-          console.log("Duration can not go below 10 minutes or it can not be greater than 2 hours");
+          res.send("Duration can not go below 10 minutes or it can not be greater than 2 hours");
         }
       }else{
-        console.log("Invalid!! Starting time is bigger")
+        res.send("Invalid!! Starting time is bigger");
       }
     }else{
       if((hours2-hours1) >= 0){
         const Workhours = hours2 - hours1;
         const Workmins = minute2 - minute1;
         const Duration = Workhours + (Workmins/60);
-  
         if((Duration >= (1/6)) && (Duration <= 2)){
           if(checkUser.computer_id == ""){
             if(list_of_computers.length !== 0){
@@ -337,27 +261,23 @@ app.post("/slot", async (req, res) => {
               await Computer.updateOne({_id: randomItem._id}, {bookers_id: user_id});
               res.redirect("/slot");
             }else{
-                console.log("No free computers");
+              res.send("No free computers");
               }
           }else{
-              console.log("already booked");
+            res.send("already booked");
             }
         }else{
-          console.log("Duration can not go below 10 minutes or it can not be greater than 2 hours");
+          res.send("Duration can not go below 10 minutes or it can not be greater than 2 hours");
         }
       }else{
-        console.log("Invalid!! Starting time is bigger")
+        res.send("Invalid!! Starting time is bigger");
       }
     }
-    
-    
   } catch (error) {
-      console.log(error);
-      res.status(500).send("A problem occurred");
-    }
+    res.status(500).send("A problem occurred");
+  }
  });
 
-// DISPLAYING BOOKED COMPUTER
 app.get("/getComputer", async (req, res) => {
   const user = await User.findOne({ Email: req.session.userid.Email });
   res.json({
@@ -374,9 +294,10 @@ app.get("/list1", async (req, res) => {
   });
 });
 
-// ADMINISTRATOR SIGNUP
+app.get("/sign_up", function (req, res) {
+  res.render("index.html");
+});
 app.post("/sign_up", async (req, res) => {
-  console.log(req.body);
   try {
     const Exist11 = await Admin.findOne({ Email1: req.body.Email1 });
     if (Exist11) {
@@ -396,20 +317,19 @@ app.post("/sign_up", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
     res.status(500).send("Internal Server error Occured");
   }
 });
 
-// ADMINISTRATOR LOGIN
+app.get("/adminLogin", function (req, res) {
+  res.render("index.html");
+});
 app.post("/adminLogin", async (req, res) => {
   try {
     const user = await Admin.findOne({ Email1: req.body.user_name1 });
-    console.log(user);
     if (user) {
       const cmp = await bcrypt.compare(req.body.password01, user.password01);
       if (cmp) {
-        //   ..... further code to maintain authentication like jwt or sessions
         res.redirect("/addComputer");
       } else {
         res.send("Wrong password.");
@@ -418,18 +338,24 @@ app.post("/adminLogin", async (req, res) => {
       res.send("Wrong username or User does not exist.");
     }
   } catch (error) {
-    console.log(error);
     res.status(500).send("Internal Server error Occured");
   }
 });
 
-// ADDING COMPUTERS TO THE DATABASE
-
+app.get("/addComputer", function (req, res) {
+  Computer.find((err, docs) => {
+    if (!err) {
+      res.render("computers.html", {
+        data: docs,
+      });
+    } else {
+      res.send("Failed to retrieve the Course List: " + err);
+    }
+  });
+});
 app.post("/addComputer", async (req, res) => {
-  console.log(req.body);
   try {
     const Comp = await Computer.findOne({ CompName: req.body.CompName });
-
     if (Comp) {
       res.send("Computer is already in the database");
     } else {
@@ -440,14 +366,14 @@ app.post("/addComputer", async (req, res) => {
       res.send("Computer added successfully");
     }
   } catch (error) {
-    console.log(error);
     res.status(500).send("Internal Server error Occured");
   }
 });
 
-// DELETING COMPUTERS
+app.get("/removeComputer", function (req, res) {
+  res.render("computers.html");
+});
 app.post('/removeComputer', async (req, res)=>{
-  console.log(req.body);
   try {
     const query = { title: req.body.CompName };
     const result = await Computer.deleteOne(query);
@@ -457,14 +383,14 @@ app.post('/removeComputer', async (req, res)=>{
       res.send("No computers matched the query. Deleted 0 computers.");
     }
   }catch (error) {
-    console.log(error);
     res.status(500).send("Internal Server error Occured");
   }
 });
 
-//DECLINING APPOINTMENT
+app.get("/decline", function (req, res) {
+  res.render("computers.html");
+});
 app.post('/decline', async (req, res)=>{
-  console.log(req.body);
   try {
     const decline = await User.findOne({computer_id: req.body.CompID});
     if(decline){
@@ -472,20 +398,16 @@ app.post('/decline', async (req, res)=>{
         CompName: "", details: "",
         booking_date: "", start_time: "",
         stop_time: ""});
-        
       await Computer.updateOne({_id: req.body.CompID}, {bookers_id: ""});
       res.redirect("/decline");
     }else{
-      console.log("Wrong computer ID");
+      res.send("Wrong computer ID");
     }
-    
   } catch (error) {
-    console.log(error);
     res.status(500).send("Internal Server error Occured");
   }
 })
 
-// DISPLAYING BOOKED COMPUTERS AND USERS
 app.get("/getBooked", async (req, res) => {
   const list_of_computers = await User.find({"computer_id": {"$exists" : true, "$ne" : ""}});
   res.json({
@@ -499,7 +421,6 @@ app.get("/list2", async (req, res) => {
     list1: list_of_computers,
   });
 });
-
 
 app.listen(port, ()=> {
   console.log("Server is running on 5000");

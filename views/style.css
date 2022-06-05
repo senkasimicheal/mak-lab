@@ -89,7 +89,6 @@ header .navbar ul li a:hover{
     color: #444;
 }
 
-/* THE SIGNIN DROPDOWN BUTTON */
 .dd{
     font-size: 2rem;
     color: #fff;
@@ -112,7 +111,6 @@ header .navbar ul li a:hover{
     display: block;
 }
 
-/* THE DROPDOWN SIGNIN CONTENT */
 header #login{
     font-weight: bold;
     font-size: large;
@@ -151,8 +149,6 @@ header #menu{
     cursor: pointer;
     display: none;
 }
-
-/* media queries */
 
 @media (max-width:768px){
     html{
@@ -215,9 +211,6 @@ header #menu{
 section {
     clear: both;
 }
-
-
-/* STUDENT LOGIN FORM */
 
 .login-form{
     height: 100%;
@@ -303,9 +296,6 @@ section {
     color: #444;
 }
 
-
-/* STUDENT SIGNUP FORM */
-
 .signup-form{
     height: 100%;
     width: 100%;
@@ -379,8 +369,6 @@ section {
 .signup-form form .fa-times:hover{
     color: #444;
 }
-
-/* ADMINISTRATOR LOGIN FORM */
 
 .login-form2{
     height: 100%;
@@ -466,8 +454,6 @@ section {
     color: #444;
 }
 
-/* ADMINISTRATOR SIGNUP FORM */
-
 .signup-form2{
     height: 100%;
     width: 100%;
@@ -541,8 +527,6 @@ section {
 .signup-form2 form .fa-times:hover{
     color: #444;
 }
-
-/* THE CONTACT SECTION */
 
 .contact{
     background: #111;
@@ -740,11 +724,6 @@ section {
     color: #f39c12;
 }
 
-
-
-
-/* THE BOOKING PAGE */
-
 .Body{
     background: rgb(63, 64, 58);
 }
@@ -757,7 +736,6 @@ section {
 
 .comp a{
     color: #ccc;
-
 }
 
 .home{
@@ -818,7 +796,6 @@ h2{
     font-weight: bold;
 }
 
-
 .book-form{
     margin-top: 5%;
     height: 100%;
@@ -871,8 +848,6 @@ h2{
 .book-form form .book:hover{
     color: #444;
 }
-
-/* UPDATE COMPUTER SECTION */
 
 .Body1{
     background: rgb(239, 244, 217);
@@ -975,4 +950,8 @@ h2{
 
 section .bookers{
     text-shadow: #111;
+}
+
+.welcome{
+    text-align: center;
 }

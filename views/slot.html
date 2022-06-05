@@ -21,19 +21,16 @@
       </a>
     </nav>
 
-    <h1>Welcome to the computer lab</h1>
+    <h1 class="welcome">Welcome to the computer lab</h1>
     <h3 class="loggedin">Logged in as</h3>
     <div class="container"></div>
 
     <script>
       const container = document.querySelector(".container");
-
       const getData = async () => {
         const raw_data = await fetch("/getSession");
         const data = await raw_data.json();
-
         const boolean = true;
-
         console.log(data["user"]);
         container.innerHTML = boolean ? `${data["user"]}` : `no users`;
         return data;
@@ -46,23 +43,9 @@
       <form action="/slot" method="post">
         <h2>book for a slot from here</h2>
         <label for="appt">Choose start time:</label>
-        <input
-          type="time"
-          id="appt"
-          name="start_time"
-          min="08:00"
-          max="17:00"
-          required
-        />
+        <input type="time" id="appt" name="start_time" min="08:00" max="17:00" required/>
         <label for="appt">Choose stop time:</label>
-        <input
-          type="time"
-          id="appt"
-          name="stop_time"
-          min="08:00"
-          max="17:00"
-          required
-        />
+        <input type="time" id="appt" name="stop_time" min="08:00" max="17:00" required/>
         <input type="submit" class="book" value="Book now" />
         <p></p>
       </form>
@@ -71,20 +54,16 @@
     <div>
       <h2 class="d">You have booked computer with the following details</h2>
       <h2>Computer name</h2>
-
       <div class="container1"></div>
       <h2>Computer ID</h2>
       <div class="container2"></div>
       <script>
         const container1 = document.querySelector(".container1");
         const container2 = document.querySelector(".container2");
-
         const getComputer = async () => {
           const raw_computer = await fetch("/getComputer");
           const data1 = await raw_computer.json();
-
           const boolean = true;
-
           console.log(data1["comp"]);
           console.log(data1["id"]);
           container1.innerHTML = boolean ? `${data1["comp"]}` : `no computers`;
