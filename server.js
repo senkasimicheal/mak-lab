@@ -28,7 +28,6 @@ app.use(
 app.use(express.json());
 
 var engine = require("consolidate");
-const { default: isEmail } = require("validator/lib/isemail");
 const { json } = require("express");
 
 app.set("views", __dirname + "/views");
@@ -66,7 +65,6 @@ var userSchema = new Mongoose.Schema({
     type: String,
     unique: true,
     lowercase: true,
-    validate: [isEmail, "Please provide a valid email"],
   },
   password1: String,
   computer_id: {
@@ -108,7 +106,6 @@ var adminSchema = new Mongoose.Schema({
     type: String,
     unique: true,
     lowercase: true,
-    validate: [isEmail, "Please provide a valid email"],
   },
   password01: String,
   password02: String,
