@@ -107,11 +107,18 @@ var adminSchema = new Mongoose.Schema({
     unique: true,
     lowercase: true,
   },
+  staffID: String,
   password01: String,
   password02: String,
 });
 
 const Admin = Mongoose.model("admin", adminSchema);
+
+var idsSchema = new Mongoose.Schema({
+  staffID: String
+});
+
+const IDS = Mongoose.model("ids", idsSchema);
 
 var computerSchema = new Mongoose.Schema({
   CompName: {
@@ -296,21 +303,26 @@ app.get("/sign_up", function (req, res) {
 });
 app.post("/sign_up", async (req, res) => {
   try {
+    const sID = await IDS.findOne({staffID: req.body.staffID});
     const Exist11 = await Admin.findOne({ Email1: req.body.Email1 });
     if (Exist11) {
       res.send("User already exists! Check your email and try again");
     } else {
-      if (req.body.password01 != req.body.password02) {
-        res.send("Passwords don't match");
-      } else {
-        const hashedPwd1 = await bcrypt.hash(req.body.password01, saltRounds);
-        const insertResult1 = await Admin.create({
-          registration_date: Date.now(),
-          Name1: req.body.Name1,
-          Email1: req.body.Email1,
-          password01: hashedPwd1,
-        });
-        res.render("computers.html");
+      if(sID){
+        if (req.body.password01 != req.body.password02) {
+          res.send("Passwords don't match");
+        } else {
+          const hashedPwd1 = await bcrypt.hash(req.body.password01, saltRounds);
+          const insertResult1 = await Admin.create({
+            registration_date: Date.now(),
+            Name1: req.body.Name1,
+            Email1: req.body.Email1,
+            password01: hashedPwd1,
+          });
+          res.render("computers.html");
+        }
+      }else{
+        res.send("Wrong staff ID number");
       }
     }
   } catch (error) {
