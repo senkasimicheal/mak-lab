@@ -32,7 +32,7 @@
 
         <div class="add">
             <form action="/addComputer" method="post">
-                <h2>Add a computer</h2>
+                <h2 class="adminHead">Add a computer</h2>
                 <input class="computer" type="text" placeholder="computer name" name="CompName" required>
                 <textarea required name="details" placeholder="type computer details here" id="" cols="30" rows="10"></textarea>
                 <input required type="submit" class="btn">
@@ -41,13 +41,13 @@
 
         <div class="update">
             <form action="/removeComputer" method="post">
-                <h2>Remove a computer</h2>
+                <h2 class="adminHead">Remove a computer</h2>
                 <input class="computer" type="text" placeholder="computer name" name="CompName" required>
                 <input required type="submit" class="btn">
             </form>
         </div>
 
-        <h2>STUDENTS WITH APPOINTMENTS</h2>
+        <h2 class="adminHead appoint">Students with appointments</h2>
         <div>
             <form action="/decline" method="post">
                 <input class="decline" type="text" placeholder="Enter computer ID to decline appointment" name="CompID" required>

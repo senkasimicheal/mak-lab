@@ -860,7 +860,7 @@ h2{
 }
 
 .admin .add{
-    margin-top: 1%;
+    margin-top: 3%;
     height: 100%;
     width: 100%;
     position: relative;
@@ -1094,4 +1094,13 @@ section .whythis{
     margin-top: 3%;
     margin-bottom: 1%;
     display: flex;
+}
+
+.adminHead{
+    text-transform: none;
+    display: flex;
+}
+
+.appoint{
+    margin-top: 2%;
 }

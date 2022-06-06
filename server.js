@@ -191,19 +191,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/NewPSDemail", function (reg, res){
-  res.render("resetpsd.html");
-});
-app.post("/NewPSDemail", async(req, res)=>{
-  try {
-    const user = await User.findOne({Email: req.body.yourEmail});
-    if(user){
-      
-    }
-  } catch (error) {
-    res.status(500).send("Internal Server error Occured");
-  }
-})
 
 app.get("/getSession", async (req, res) => {
   res.json({
