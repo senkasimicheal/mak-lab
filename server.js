@@ -6,6 +6,7 @@ const  Mongoose = require("mongoose");
 const  bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const sessions = require("express-session");
+var nodemailer = require('nodemailer');
 
 bcrypt = require("bcrypt");
 
@@ -189,6 +190,20 @@ app.post("/login", async (req, res) => {
     res.status(500).send("Internal Server error Occured");
   }
 });
+
+app.get("/NewPSDemail", function (reg, res){
+  res.render("resetpsd.html");
+});
+app.post("/NewPSDemail", async(req, res)=>{
+  try {
+    const user = await User.findOne({Email: req.body.yourEmail});
+    if(user){
+      
+    }
+  } catch (error) {
+    res.status(500).send("Internal Server error Occured");
+  }
+})
 
 app.get("/getSession", async (req, res) => {
   res.json({

@@ -112,6 +112,7 @@ header .navbar ul li a:hover{
 }
 
 header #login{
+    margin-top: 10%;
     font-weight: bold;
     font-size: large;
     color: rgb(11, 24, 84);
@@ -904,8 +905,6 @@ h2{
 .Body1 h2{
     color: #6f490b;
     font-size: large;
-    text-align: left;
-    margin-top: 2%;
 }
 
 .Body1 .computer{
@@ -1011,7 +1010,7 @@ section .whythis{
     box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
 }
 
-.btn2{
+.submit-button2{
     padding: .05rem 1rem;
     font-size: 2rem;
     background: var(--gradient);
@@ -1048,4 +1047,51 @@ section .whythis{
 
 #show{
     display: none;
+}
+
+.new_psd{
+    color: #6f490b;
+    font-size: large;
+}
+
+#Newpsd{
+    /* display: none; */
+    height: 10%;
+    width: 100%;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+}
+
+.newPSD{
+    border: 2px solid #ccc;
+    padding: 6px 20px;
+}
+
+.btn3{
+    padding: .05rem 1rem;
+    font-size: 2rem;
+    background: var(--gradient);
+    border-radius: 5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+}
+
+.resetpsd .one{
+    margin-top: 1%;
+    margin-bottom: -3%;
+    display: flex;
+}
+
+.resetpsd .two{
+    text-transform: none;
+    margin-top: 1%;
+    display: flex;
+}
+
+.resetpsd .two1{
+    margin-top: 3%;
+    margin-bottom: 1%;
+    display: flex;
 }
