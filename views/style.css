@@ -69,6 +69,7 @@ header #logo{
     font-size: 2.5rem;
 }
 
+
 header .navbar ul{
     display: flex;
     align-items: center;
@@ -90,29 +91,55 @@ header .navbar ul li a:hover{
 }
 
 .dd{
+    display: flex;
+    list-style: none;
     font-size: 2rem;
     color: #fff;
     cursor: pointer;
-    display: block;
     position: relative;
 }
 
+.dd1{
+    display: flex;
+    list-style: none;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+}
+
+#dd-btn{
+    margin-right: 10%;
+}
+#dd-btn1{
+    margin-left: 10%;
+}
+
+
 .dd-content{
+    margin-top: 48%;
     position: absolute;
     display: none;
 }
 
 .dd:hover{
     cursor: pointer;
-    color: rgb(181, 35, 35);
+    color: rgb(34, 165, 141);
 }
 
 .dd:hover > .dd-content{
     display: block;
 }
 
+.dd1:hover{
+    cursor: pointer;
+    color: rgb(34, 165, 141);
+}
+
+.dd1:hover > .dd-content{
+    display: block;
+}
 header #login{
-    margin-top: 10%;
     font-weight: bold;
     font-size: large;
     color: rgb(11, 24, 84);
@@ -143,6 +170,40 @@ header #login1:hover{
     font-size: large;
     background: #444;
 }
+
+header #signup{
+    margin-top: -10%;
+    font-weight: bold;
+    font-size: large;
+    color: rgb(11, 24, 84);
+    cursor: pointer;
+    display: block;
+    background: slategray;
+}
+
+header #signup:hover{
+    color: rgb(154, 115, 24);
+    text-decoration: underline;
+    font-size: large;
+    background: #444;
+}
+
+header #signup1{
+    font-weight: bold;
+    font-size: large;
+    color: rgb(11, 24, 84);
+    cursor: pointer;
+    display: block;
+    background:  slategray;
+}
+
+header #signup1:hover{
+    color: rgb(154, 115, 24);
+    text-decoration: underline;
+    font-size: large;
+    background: #444;
+}
+
 
 header #menu{
     font-size: 3rem;
